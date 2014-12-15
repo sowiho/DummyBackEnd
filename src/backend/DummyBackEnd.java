@@ -17,12 +17,11 @@ import ferry.eto.DataAccessException;
 import ferry.eto.NoSuchFerryException;
 import ferry.eto.NoSuchHarbourException;
 import ferry.eto.NoSuchScheduleException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
-import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
 
 
@@ -64,10 +63,23 @@ public class DummyBackEnd implements AdminContract {
 
     @Override
     public Collection<ScheduleDetail> showSchedulesForDate(Date date) throws NoSuchScheduleException {
-       
-        Collection<ScheduleDetail> shcedules = new ArrayList<ScheduleDetail>();
-        shcedules.add(new ScheduleDetail(1, new Date(1418492669000l), new Date(1418492669000l), new HashSet<DepartureDetail>()));
-        return shcedules;
+       Collection<ScheduleDetail> schedules = new ArrayList<ScheduleDetail>();
+        Collection<ScheduleDetail> schedulesToShow = new ArrayList<ScheduleDetail>();
+        //13/12/14
+        Date endDate = new Date(1418491694000l);
+        //11/12/14
+        Date startDate = new Date(1418481694000l);
+        SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
+        SimpleDateFormat df3 = new SimpleDateFormat("dd/MM/yy");
+        schedules.add(new ScheduleDetail(1, endDate, startDate, null));
+        schedules.add(new ScheduleDetail(1, endDate, startDate, null));
+        for (ScheduleDetail i: schedules ){
+            if (df2.format(i.getStartDate()).equals(df3.format(date))){
+                schedulesToShow.add(i);
+            }
+        }
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return schedulesToShow;
     }
 
     @Override
