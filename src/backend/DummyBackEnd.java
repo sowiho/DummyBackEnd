@@ -62,7 +62,7 @@ public class DummyBackEnd implements AdminContract {
     }
 
     @Override
-    public Collection<ScheduleDetail> showSchedulesForDate(Date date) throws NoSuchScheduleException {
+        public Collection<ScheduleDetail> showSchedulesForDate(Date date) throws NoSuchScheduleException {
        Collection<ScheduleDetail> schedules = new ArrayList<ScheduleDetail>();
         Collection<ScheduleDetail> schedulesToShow = new ArrayList<ScheduleDetail>();
         //13/12/14
@@ -93,7 +93,10 @@ public class DummyBackEnd implements AdminContract {
 
     @Override
     public void assignFerryToSchedule(FerryIdentifier ferryId, ScheduleIdentifier scheduleId) throws DataAccessException, NoSuchFerryException, NoSuchScheduleException {
-    
+    if (ferryId.getID()==-1)
+        throw new NoSuchFerryException();
+       if (scheduleId.getID()==-1)
+           throw  new NoSuchScheduleException();
     }
 
     /**
